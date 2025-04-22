@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:6001";
+const BASE_URL = "https://json-server-wsrt.onrender.com";
 
 export const api = {
   async getPlants() {

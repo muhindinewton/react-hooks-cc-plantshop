@@ -1,149 +1,104 @@
-# Phase 2 Code Challenge: Plantsy
+# 🌿 Plant Shop
 
-## Demo
+A React application for managing a plant shop inventory. Users can view, add, update, and delete plants, as well as mark them as sold out and search through the inventory.
 
-Use this gif as an example of how the app should work.
+## Features
 
-![Demo GIF](https://curriculum-content.s3.amazonaws.com/phase-2/react-hooks-mock-code-challenge-plantshop/plantsy_demo.gif)
+### Core Features
+- 🌱 View all available plants
+- ➕ Add new plants to the inventory
+- 📦 Mark plants as "sold out"
+- 🔍 Search plants by name
 
-## Instructions
+### Advanced Features
+- 💰 Update plant prices (click on the price with pencil icon to edit)
+- 🗑️ Delete plants from inventory
 
-Welcome to Plantsy! You've been tasked with building out some features for the
-admin side of a plant store. The designers have put together the components and
-CSS. Now it's up to you to bring the features to life by adding stateful logic
-as well as persisting data to the backend via our API.
+## Getting Started
 
-Your job will be to make our app work according to the user stories you will
-find the [Core Deliverables](#Core-Deliverables) section.
+### Prerequisites
+- Node.js (v14 or higher)
+- npm (v6 or higher)
 
-## Setup
+### Installation
 
-1. Run `npm install` in your terminal.
-2. Run `npm run server`. This will run your backend on port `6001`.
-3. In a new terminal, run `npm start`.
-
-Make sure to open [http://localhost:6001/plants](http://localhost:6001/plants)
-in the browser to verify that your backend is working before you proceed!
-
-## Endpoints
-
-The base URL for your backend is: `http://localhost:6001`
-
-## Core Deliverables
-
-As a user:
-
-1. When the app starts, I can see all plants.
-2. I can add a new plant to the page by submitting the form.
-3. I can mark a plant as "sold out".
-4. I can search for plants by their name and see a filtered list of plants.
-
-### Endpoints for Core Deliverables
-
-#### GET /plants
-
-Example Response:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Aloe",
-    "image": "./images/aloe.jpg",
-    "price": 15.99
-  },
-  {
-    "id": 2,
-    "name": "ZZ Plant",
-    "image": "./images/zz-plant.jpg",
-    "price": 25.98
-  }
-]
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd react-hooks-cc-plantshop
 ```
 
-#### POST `/plants`
-
-Required Headers:
-
-```js
-{
-  "Content-Type": "application/json"
-}
+2. Install dependencies:
+```bash
+npm install
 ```
 
-Request Object:
+3. Start the JSON server (on port 6001):
+```bash
+json-server --watch db.json --port 6001
+```
 
+4. In a new terminal, start the React development server:
+```bash
+npm start
+```
+
+## Usage
+
+### Adding a Plant
+1. Fill out the "New Plant" form at the top of the page
+2. Enter the plant name, image URL, and price
+3. Click "Add Plant"
+
+### Updating a Plant
+- To edit price: Click on the price (indicated by a pencil icon)
+- To mark as sold out: Click the "In Stock" button
+
+### Searching Plants
+- Use the search bar to filter plants by name
+- Search is case-insensitive
+
+### Deleting a Plant
+- Click the "Delete" button on any plant card
+
+## API Endpoints
+
+### GET /plants
+- Returns all plants
+
+### POST /plants
+- Creates a new plant
+- Required headers: `Content-Type: Application/JSON`
+- Request body example:
 ```json
 {
   "name": "string",
   "image": "string",
-  "price": number
+  "price": "string"
 }
 ```
 
-Example Response:
+### PATCH /plants/:id
+- Updates a plant
+- Required headers: `Content-Type: Application/JSON`
 
-```json
-{
-  "id": 1,
-  "name": "Aloe",
-  "image": "./images/aloe.jpg",
-  "price": 15.99
-}
-```
+### DELETE /plants/:id
+- Deletes a plant
 
-## Advanced Deliverables
+## Technologies Used
 
-These deliverables are not required to pass the code challenge, but if you have
-the extra time, or even after the code challenge, they are a great way to
-stretch your skills.
+- ⚛️ React
+- 🪝 React Hooks (useState, useEffect, useCallback)
+- 🎨 CSS for styling
+- 🔄 JSON Server for mock backend
 
-You'll have to add additional elements for these features. Feel free to style
-them however you see fit!
+## Contributing
 
-> Note: If you are going to attempt these advanced deliverables, please be sure
-> to have a working commit with all the Core Deliverables first!
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-As a user:
+## License
 
-1. I can update the price of a plant and still see the updated price after
-   refreshing the page.
-2. I can delete a plant and it is still gone when I refresh the page.
-
-### Endpoints for Advanced Deliverables
-
-#### PATCH /plants/:id
-
-Required Headers:
-
-```js
-{
-  "Content-Type": "application/json"
-}
-```
-
-Request Object:
-
-```json
-{
-  "price": number
-}
-```
-
-Example Response:
-
-```json
-{
-  "id": 1,
-  "name": "Aloe",
-  "image": "./images/aloe.jpg",
-  "price": 16.99
-}
-```
-
-#### DELETE /plants/:id
-
-Example Response:
+[MIT](https://choosealicense.com/licenses/mit/)
 
 ```json
 {}
