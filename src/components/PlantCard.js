@@ -1,22 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, memo } from "react";
 
-function PlantCard({ plant, onUpdatePlant, onDeletePlant }) {
+const PlantCard = memo(({ plant, onUpdatePlant, onDeletePlant }) => {
   const [isInStock, setIsInStock] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [price, setPrice] = useState(plant.price);
 
-  function handleStockClick() {
-    setIsInStock(!isInStock);
-  }
+  const handleStockClick = useCallback(() => {
+    setIsInStock((current) => !current);
+    onUpdatePlant({
+      ...plant,
+      inStock: !isInStock,
+    });
+  }, [isInStock, onUpdatePlant, plant]);
 
-  function handlePriceSubmit(e) {
+  const handlePriceSubmit = useCallback((e) => {
     e.preventDefault();
     onUpdatePlant({
       ...plant,
-      price: parseFloat(price),
+      price,
     });
     setIsEditing(false);
-  }
+  }, [price, onUpdatePlant, plant]);
+
+  const handlePriceChange = useCallback((e) => {
+    setPrice(e.target.value);
+  }, []);
+
+  const startEditing = useCallback(() => {
+    setIsEditing(true);
+  }, []);
+
+  const handleDelete = useCallback(() => {
+    onDeletePlant(plant.id);
+  }, [onDeletePlant, plant.id]);
 
   return (
     <li className="card" data-testid="plant-item">
@@ -28,13 +44,25 @@ function PlantCard({ plant, onUpdatePlant, onDeletePlant }) {
             type="number"
             step="0.01"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={handlePriceChange}
+            min="0"
+            required
           />
           <button type="submit">Save</button>
         </form>
       ) : (
-        <p onClick={() => setIsEditing(true)} style={{ cursor: "pointer" }}>
+        <p 
+          onClick={startEditing} 
+          style={{ 
+            cursor: "pointer", 
+            display: "flex", 
+            alignItems: "center", 
+            gap: "5px" 
+          }}
+          title="Click to edit price"
+        >
           Price: {plant.price}
+          <span role="img" aria-label="edit" style={{ fontSize: "0.8em" }}>✏️</span>
         </p>
       )}
       <button
@@ -43,11 +71,13 @@ function PlantCard({ plant, onUpdatePlant, onDeletePlant }) {
       >
         {isInStock ? "In Stock" : "Out of Stock"}
       </button>
-      <button onClick={() => onDeletePlant(plant.id)} className="remove">
+      <button onClick={handleDelete} className="remove">
         Delete
       </button>
     </li>
   );
-}
+});
+
+PlantCard.displayName = "PlantCard";
 
 export default PlantCard;
