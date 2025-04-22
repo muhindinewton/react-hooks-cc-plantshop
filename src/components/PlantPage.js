@@ -8,16 +8,16 @@ function PlantPage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3001/plants")
+    fetch("http://localhost:6001/plants")
       .then((r) => r.json())
       .then((plants) => setPlants(plants));
   }, []);
 
   function handleAddPlant(newPlant) {
-    fetch("http://localhost:3001/plants", {
+    fetch("http://localhost:6001/plants", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "Application/JSON",
       },
       body: JSON.stringify(newPlant),
     })
@@ -26,7 +26,7 @@ function PlantPage() {
   }
 
   function handleUpdatePlant(updatedPlant) {
-    fetch(`http://localhost:3001/plants/${updatedPlant.id}`, {
+    fetch(`http://localhost:6001/plants/${updatedPlant.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ function PlantPage() {
   }
 
   function handleDeletePlant(id) {
-    fetch(`http://localhost:3001/plants/${id}`, {
+    fetch(`http://localhost:6001/plants/${id}`, {
       method: "DELETE",
     })
       .then((r) => r.json())

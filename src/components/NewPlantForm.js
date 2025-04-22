@@ -19,7 +19,7 @@ function NewPlantForm({ onAddPlant }) {
     e.preventDefault();
     onAddPlant({
       ...formData,
-      price: parseFloat(formData.price),
+      price: formData.price,
     });
     setFormData({
       name: "",

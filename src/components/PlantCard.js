@@ -34,7 +34,7 @@ function PlantCard({ plant, onUpdatePlant, onDeletePlant }) {
         </form>
       ) : (
         <p onClick={() => setIsEditing(true)} style={{ cursor: "pointer" }}>
-          Price: ${plant.price.toFixed(2)}
+          Price: {plant.price}
         </p>
       )}
       <button
